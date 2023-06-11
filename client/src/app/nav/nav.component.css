@@ -1,0 +1,8 @@
+.dropdown-menu-right {
+    right: 0 !important;
+    left: auto !important; 
+}
+
+.dropdown-toggle, .dropdown-item{
+    cursor: pointer;
+}
