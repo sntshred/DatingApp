@@ -69,3 +69,6 @@
 /Users/santosh/Desktop/DatingApp/API/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /Users/santosh/Desktop/DatingApp/API/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.dll
 /Users/santosh/Desktop/DatingApp/API/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/santosh/Desktop/DatingApp/API/bin/Debug/net7.0/Data/UserSeedData.json
+/Users/santosh/Desktop/DatingApp/API/bin/Debug/net7.0/AutoMapper.dll
+/Users/santosh/Desktop/DatingApp/API/bin/Debug/net7.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
