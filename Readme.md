@@ -5,24 +5,17 @@ dotnet sln add API (adding API project to sln)
 
 C# Extension Settings
 
-
-
-
-
-
-
 dotnet run (To run the project)
-dotnet run -lp https   (running https launch profile)
+dotnet run -lp https (running https launch profile)
 dotnet watch run (Hot reload)
 dotnet ef migrations add IntialCreate -o Data/Migrations -c DataContext (Running the migrations)
 dotnet ef database update -c DataContext (creating the table in DB)
-dotnet ef migrations add UserPasswordAdded 
-dotnet ef migrations add  usernamerequired
-dotnet ef database update  
+dotnet ef migrations add UserPasswordAdded
+dotnet ef migrations add usernamerequired
+dotnet ef database update
 
 dotnet ef database drop
 dotnet ef database update
-
 
 Pro Tip: Using the command line check what are the options available
 dotnet ef -h
@@ -39,7 +32,7 @@ Now, once the database has fulfilled its part of the request, then it will notif
 that this request came in on. And then that request can go and pick up the response from the database server and return it to the requesting client. to the web server. But it isn't blocked whilst it's waiting for the database to return.
 
 SSL Certificate
-We'll say Sstl for server key  And then we can specify that SSL is true.
+We'll say Sstl for server key And then we can specify that SSL is true.
 And when we run our app again, it's going to use this configuration to serve our application over HTTPS
 using this certificate.
 Click next and place all certificates in the following store and trusted route certification authorities.
@@ -52,7 +45,6 @@ dotnet watch --no-hot-reload
 
 dotnet ef migrations add UserPasswordAdded
 
-
 using var hmac = new HMACSHA512(); // creates the instance and returns the randomly generated key
 This randomly generated key used for PasswordSalt
 
@@ -60,7 +52,7 @@ DTO: using DTO we could send the data from the body and controller endpoint ( ma
 And in order for our API controller to bind to that object, then this has to be an object.
 And that would be one reason to use a DTO is so that we can get data from the body of a request.
 
-dotnet ef migrations add  usernamerequired
+dotnet ef migrations add usernamerequired
 
 User login (client and API server)
 Now, this doesn't mean that they're logged in, because when we use an API server and a client in this
@@ -87,7 +79,6 @@ And we're going to store our super secret key that we're going to use to sign ou
 We're going to store that in our configuration.
 And in order to get our configuration and inject it into the service, then we need to inject AI configuration
 
-
 There's two types of keys really used in cryptography.
 There's a symmetric key where the same key is used to encrypt the data as is used to decrypt the data.
 And since our server is responsible for both signing the token and decrypting the token or the token
@@ -103,18 +94,14 @@ We have a public and private key.
 So that's as simple as it is to specify that you want your endpoints to be authenticated against.
 But we need to tell our server how to authenticate.
 And to do that, we need to go back to our program class so that we can set this up.
-So there's two parts to this  There's a service that we need to add and there's middleware we need to use.
-
-
-
-
+So there's two parts to this There's a service that we need to add and there's middleware we need to use.
 
 LINQ
 First or FirstDefault: If the sequence has more than one value for the condition, return the first element.
 (Input collection has same user name twice, you want to pick the first one)
 Single or SingeorDefault: If the sequence contain matching element returns the value, because we saving the users unique we can use this. (input collection has unique users)
 
-ng g s _services/account --skip-tests --dry-run;  
+ng g s \_services/account --skip-tests --dry-run;
 
 Observable
 So in order to use this, we're going to chain on the pipe.
@@ -131,26 +118,26 @@ And we're going to use a special kind of observable for this called a behavior s
 us to give an observable an initial value that we can then use elsewhere in our app.
 
 const user:User = JSON.parse(localStorage.getItem("user")!);
-! is 
+! is
 And this effectively turns off typescript safety and useless with care if you're going to use it, because
 basically you're saying as a developer you know best and in this case it would be fine to use it because
 you could then check to see if you have a user before moving forward with what we're going to do next.
 
 !! use case: If there's a data in the user, it will turn into true, otherwise false.
-  getCurrentUser(){
-    this.accountService.currentUser$.subscribe({
-      next: user => this.loggedIn = !!user,
-      error: error => console.log(error)
-    })
-  }
+getCurrentUser(){
+this.accountService.currentUser$.subscribe({
+next: user => this.loggedIn = !!user,
+error: error => console.log(error)
+})
+}
 
-Unsubscribe to observable, however we don't need to  unsubscribe to HTTP because it completes.
+Unsubscribe to observable, however we don't need to unsubscribe to HTTP because it completes.
 we know that our account service is going to make an HTTP request and HTTP requests complete.
 And once they complete, you're no longer subscribed to that observable.
 So in a case of HTTP requests, then it's not essential to unsubscribe.
 But in the case of our own observables, we do want to unsubscribe from them.
 
-ng g m _modules/shared --flat --dry-run (--flat is used to avoid creating a folder)
+ng g m \_modules/shared --flat --dry-run (--flat is used to avoid creating a folder)
 
 The middleware and the middleware, by the way.
 Where the app developer exception page would have been would be at the top of our middleware.
@@ -210,52 +197,76 @@ using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 try
 {
-   var context = services.GetRequiredService<DataContext>();
-   await context.Database.MigrateAsync();
-   await Seed.SeedUsers(context);
+var context = services.GetRequiredService<DataContext>();
+await context.Database.MigrateAsync();
+await Seed.SeedUsers(context);
 }
 catch (System.Exception ex)
 {
-   var logger = services.GetService<ILogger<Program>>();
-   logger.LogError(ex,"An error occurred during migration");
+var logger = services.GetService<ILogger<Program>>();
+logger.LogError(ex,"An error occurred during migration");
 }
 
 Eager Loading in Entity Framework
 Suppose you have an entity User and Photo, And User entity contains navigation property Photos
 When you call this below, by default EF, will not include photos in the list
-_context.Users.ToListAsync()
+\_context.Users.ToListAsync()
 You need to call explicitly saying (Include), this is called eager loading.
 
 AutoMapper
 Inside MappingProfile class
 we need to tell auto mapper what we want to go from and what we want to go to.
 .Mapper.Map<{GoFrom},{GoTO}>
-EG: AppUser is an Enity class and Member Dto 
- CreateMap<AppUser,MemberDto>();
- CreateMap<Photo, PhotoDto>();
+EG: AppUser is an Enity class and Member Dto
+CreateMap<AppUser,MemberDto>();
+CreateMap<Photo, PhotoDto>();
 
-Inside UserController Method     
+Inside UserController Method  
 public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
-       {
-           var users = await _userRepository.GetUserAsync();
-           var usersToReturn = _mapper.Map<IEnumerable<UserDto>>(users);
-           return Ok(usersToReturn);
-       }
-     [HttpGet("{username}")]
-       public async Task<ActionResult<MemberDto>> GetUser(string username)
-       {
-          var user = await _userRepository.GetUserByUsernameAsync(username);
-          return _mapper.Map<MemberDto>(user);
-       }
+{
+var users = await \_userRepository.GetUserAsync();
+var usersToReturn = \_mapper.Map<IEnumerable<UserDto>>(users);
+return Ok(usersToReturn);
+}
+[HttpGet("{username}")]
+public async Task<ActionResult<MemberDto>> GetUser(string username)
+{
+var user = await \_userRepository.GetUserByUsernameAsync(username);
+return \_mapper.Map<MemberDto>(user);
+}
 And we're going to set this equal to mapper dot map.
 And then we specify what we're going to map into.
 And in this case, it's going to be an i enumerable of member DTO.
 And then in parentheses, we specify what we're going to use.
 And that's going to be the users that we've just got from our repository.
 
-Map to Specific Property in AutoMapper 
+Map to Specific Property in AutoMapper
 EG: Created a new photoURL property in MemberDto and mapping it
-           .ForMember(dest => dest.PhotoUrl,
-               opt => opt.MapFrom(sourceMember => sourceMember.Photos.FirstOrDefault(x => x.IsMain).Url));
+.ForMember(dest => dest.PhotoUrl,
+opt => opt.MapFrom(sourceMember => sourceMember.Photos.FirstOrDefault(x => x.IsMain).Url));
 
+Angular Interceptors
+Now, if we're using our interceptor, there's a very good chance that our application is loaded.
+So we'll be able to get our token from the account service.
+We don't need to fish it out of our local storage because if we're getting to this point, then we've
+already done that in our root components and updated our account service.
+So we should be good to go inside here.
+So we're going to inject our account service into our interceptor and specify account service and inside
+the intercept methods and above the return next to handle request, let's make use of our account service.
 
+Trick to unsubscribe
+Take(1): Take operator:
+And that means when we have what we get back from our account service, that means this subscription
+will complete and it will no longer consume resources in our app. So we wouldn't need to physically unsubscribed from this.
+this.accountService.currentUser$.pipe(take(1)).subscribe({
+next: user => {
+if(user){
+request = request.clone({
+setHeaders:{
+Authorization:`Bearer ${user.token}`
+}
+})
+}
+}
+
+This is the equivalent of Netflix giving you the option to buy a single movie rather than subscribing
